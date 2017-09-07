@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+
+  <?php
+                    session_start();
+
+if(!isset($_SESSION['user_id'])){
+header("Location: http://localhost/Licenta/Templates/login.html"); 
+};
+
+
+if($_SESSION['user_type']!=1)
+{
+
+echo '<script>window.location="main.html#/";</script>';
+
+};
+?>
+<script src="../JS/Controllers/projectCreate.js"></script>
+
+<script src="../JS/tinymce/tinymce.min.js"></script>
+<script type="text/javascript">
+	setTimeout(function() {
+		tinymce.init({
+			selector : '#taskTextArea',
+			removed_menuitems : 'newdocument',
+			height : "280"
+		/* menubar: false,
+		toolbar:false,
+		statusbar:false,
+		contentEditable:false,
+		readonly : 1 */
+		});
+	}, 800);
+</script>
+
+<div ng-controller="createTasksController  "
+	class="col-xs-12  userContainer inputdemoIcons">
+
+
+	<div class="notificationBarSuccess col-xs-12  ">
+		<h4 class="col-md-8 col-md-offset-2 messageTextPlugin"
+			ng-model="successMessageText">{{successMessageText}}</h4>
+	</div>
+	<div class="notificationBarError col-xs-12  ">
+		<h4 class="col-md-8 col-md-offset-2 messageTextPlugin"
+			ng-model="errorMessageText">{{errorMessageText}}</h4>
+	</div>
+
+
+	<div class="col-md-12 mainInfo">
+		<div class="col-md-12">
+		<form >
+			<md-input-container class="md-block taskName" flex-gt-sm>
+			<label>Task Name</label> <input ng-model="taskName"> </md-input-container>
+
+
+
+
+
+ <md-input-container class=" md-block estimatedTime">
+			<label>Estimated Time</label> <input ng-model="estimatedTimeTask"
+				type="number" step="1">
+</md-input-container>
+
+
+
+
+
+			<md-datepicker class="datePicker" ng-model="taskDate"
+				md-placeholder="Due Date"></md-datepicker>
+		</div>
+
+<div class="col-md-2 taskPriority">
+<label for="Priority"> Priority: </label><br>
+    <select name="Priority" ng-model="priorityValue" >
+      <option value="Low">Low</option>
+      <option value="Medium" selected>Medium</option>
+      <option value="High">High</option>
+      <option value="Critical">Critical</option>
+    </select>
+</div>
+
+
+
+		<div class="col-md-12 deleteTeamLeadContainer">
+			<md-input-container class="md-block teamLeadName " flex-gt-sm
+				> <label>Assigned To:</label> <input
+				ng-model="taskUserName" readonly="readonly"> </md-input-container>
+			<button class="btn btn-danger btnDeleteTeam"
+				ng-click="deleteTaskUser()">Delete </button>
+		</div>
+
+
+
+	</div>
+
+
+	<!-- 	
+	select team lead Area -->
+	<div class="col-md-12  searchTeamContainer">
+		<md-input-container class="md-block searchTeamLead" flex-gt-sm>
+		<label>Search User</label> <input ng-model="searchTaskUser">
+		</md-input-container>
+
+		<md-card
+			class="col-md-4 col-xs-12 col-lg-4 teamLeadUserCard"
+			ng-repeat="user in usersDataTask |filter:searchTaskUser |limitTo:4">
+		<md-card-title class="teamLeadCardDetails"> <md-card-title-text>
+		<span class="md-headline userTeamName">{{user.FIRST_NAME}}
+			{{user.LAST_NAME}}</span> <span class="md-subhead userTeamRole">{{user.role_name}}</span>
+		</md-card-title-text> </md-card-title> <md-card-actions layout="row" layout-align="end center">
+
+		<md-button
+			ng-click="addTaskUser(user.USER_ID,user.FIRST_NAME,user.LAST_NAME)"
+			class="addTeamButton">Add User</md-button> </md-card-actions> </md-card>
+	</div>
+
+
+
+
+
+
+
+
+
+	<div class="col-md-10 col-md-offset-1 textDiv">
+
+		<textarea id="taskTextArea" class="form-control projectDescription"
+			ng-model="taskText" rows="8" id="comment"></textarea>
+	</div>
+
+	<button class="btn btn-primary createTaskButton" 
+		ng-click="createTask()">Create Task</button>
+
+
+
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>

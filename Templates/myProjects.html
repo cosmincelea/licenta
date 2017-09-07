@@ -1,0 +1,33 @@
+<script src="../JS/Controllers/myProjects.js"></script>
+<div ng-controller="myProjectsController" class="col-xs-12 " class="projectSearchMainContainer">
+    
+    
+    
+      
+            
+    
+    
+    
+    
+    
+<md-input-container class="md-block" flex-gt-sm>
+            <label>Search Project</label>
+            <input ng-model="searchProjectValue">
+          </md-input-container>
+<div class="projectsSearchContainer">
+ <md-card class="col-md-3 col-xs-10   col-lg-3 containerProjectCard" ng-repeat="project in projects| filter:searchProjectValue | limitTo:12">
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline  projectNameCard">{{project.project_name}} </span>
+            
+          </md-card-title-text>
+          
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+            <md-button ng-click="viewProject(project.project_id)">View Project</md-button>
+          
+        </md-card-actions>
+      </md-card>
+
+</div>
+</div>

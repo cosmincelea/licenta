@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+<html>
+
+
+
+<?php
+
+
+                    session_start();
+
+if(!isset($_SESSION['user_id'])){
+header("Location: http://localhost/Licenta/Templates/login.html"); 
+};
+?>
+
+
+
+
+<script>
+	function myFunction() {
+		function getCookie(cname) {
+			var name = cname + "=";
+			var ca = document.cookie.split(';');
+			for (var i = 0; i < ca.length; i++) {
+				var c = ca[i];
+				while (c.charAt(0) == ' ')
+					c = c.substring(1);
+				if (c.indexOf(name) == 0)
+					return c.substring(name.length, c.length);
+			}
+			return "";
+		}
+
+		if (getCookie("user_id") == "") {
+			window.location.href = "../logout.php";
+		} else {
+			console.log("Valid Cookie");
+		}
+
+	}
+
+	myFunction();
+	setInterval(myFunction, 3000);
+</script>
+<title>Home Page</title>
+
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css"
+	href="../CSS/angular-material.min.css">
+<link rel="stylesheet" type="text/css"
+	href="../bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="../sweetalert/dist/sweetalert.css">
+<link rel="stylesheet" type="text/css" href="../CSS/main.css">
+
+<link rel="stylesheet" type="text/css"
+	href="../CSS/fontAwsome/css/font-awesome.min.css">
+<!-- <link href='https://fonts.googleapis.com/css?family=Open+Sans'
+	rel='stylesheet' type='text/css'> -->
+
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" type="text/css" href="../CSS/normalize.css" />
+<!-- <link rel="stylesheet" type="text/css" href="../CSS/demo.css" /> -->
+<!-- <link rel="stylesheet" type="text/css" href="../CSS/icons.css" /> -->
+<link rel="stylesheet" type="text/css" href="../CSS/component.css" />
+<script src="../Js/modernizr.custom.js"></script>
+
+
+
+
+
+
+
+</head>
+
+<body ng-app="mainModule" ng-controller="mainController" ng-cloak="">
+
+
+
+
+
+	<div class="popup_block">
+		<div
+			class="pop_content col-xs-10 col-xs-offset-1 col-md-4 col-md-offset-4">
+			<span class="glyphicon glyphicon-remove" ng-click="close_popup()"></span>
+			<h1
+				class="col-xs-10 col-xs-offset-1 user_values_span skill_popup_name text-center"
+				ng-model="skill_name_value">{{skill_name_value}}</h1>
+			<input type="hidden" ng-model="skill_id_value"
+				ng-value="skill_id_value">
+			<md-input-container class="col-xs-10 col-xs-offset-1">
+
+			<label class="user_values">Skill Value:</label> <input
+				ng-model="skill_level_value" type="number" string-to-number step="1"
+				min="1" max="5" ng-value="skill_level_value"> </md-input-container>
+
+
+
+			<button
+				class="btn btn-success btnUpdateSkill col-xs-8 col-xs-offset-2"
+				ng-click="updateSkill(skill_id_value,index,skill_level_value)">Update
+				Level</button>
+			<button
+				class="btn btn-danger btnDeleteSkill col-xs-8 col-xs-offset-2"
+				ng-click="deleteSkill(skill_id_value,index)">Delete Skill</button>
+		</div>
+	</div>
+
+
+
+
+	<div id="st-container" class="st-container">
+
+
+		<nav class="st-menu st-effect-13 " id="menu-13">
+
+			<ul class="navMenuHamburger">
+				<li class="nav-item"  ><a href="main.html#/"><span
+						class="fa fa-home navIcons" > </span><span class="navText">
+							&nbsp &nbsp Home</span></a></li>
+				<li class="nav-item "><a href="#mail" ><span
+						class="fa fa-envelope navIcons"> </span><span class="navText">
+							&nbsp &nbsp Mail </span><span class="mailNumberFont"> {{messageNumber}}</span></a></li>
+				
+				<li class="nav-item"><a href="#usersSearch"><span
+						class="fa fa-users navIcons"> </span> 
+						
+						<span class="navText">&nbsp
+							&nbsp Search Users</span></a></li>
+							
+					<li class="nav-item" ng-show="showAdmin"><a href="#createUser"><span
+						class="fa fa-user-plus navIcons"> </span> <span class="navText">&nbsp
+							&nbsp Create User</span></a></li>		
+							
+				<li class="nav-item" ng-show="showAdmin"><a href="#projectCreate"><span
+						class="fa fa-clone navIcons"> </span> <span class="navText">&nbsp
+							&nbspCreate Project</span></a></li>
+							<li class="nav-item" ng-show="showAdmin"><a href="#projectSearch"><span
+						class="fa fa-files-o navIcons"> </span> <span class="navText">&nbsp
+							&nbsp View Projects</span></a></li>
+							<li class="nav-item"><a href="#myProjects"><span
+						class="fa fa-file navIcons"> </span> <span class="navText">&nbsp
+							&nbsp My Projects</span></a></li>
+							
+							<li class="nav-item" ng-show="showAdmin"><a href="#createTasks"><span
+						class="fa fa-plus-square-o navIcons"> </span> <span class="navText">&nbsp
+							&nbsp Create Tasks</span></a></li>
+							
+							<li class="nav-item"><a href="#myTasks"><span
+						class="fa fa-tasks navIcons"> </span> <span class="navText">&nbsp
+							&nbsp My Tasks</span></a></li>
+							
+							
+							<li class="nav-item" ng-show="showAdmin"><a href="#createNews"><span
+						class="fa fa-plus-square-o navIcons"> </span> <span class="navText">&nbsp
+							&nbsp Create News</span></a></li>
+							
+							<li class="nav-item"><a href="#allNews"><span
+						class="fa-newspaper-o fa navIcons"> </span> <span class="navText">&nbsp
+							&nbsp News</span></a></li>
+							
+							
+							
+							
+							
+							<li class="nav-item"><a href="#settings"><span
+						class="fa fa-cogs navIcons"> </span><span class="navText">&nbsp
+							&nbsp Settings</span></a></li>
+							
+			</ul>
+		</nav>
+
+
+
+
+		<div class="st-pusher">
+			<!-- 	
+					example menus 
+					these menus will be under the push wrapper
+				-->
+
+
+			<div class="st-content">
+				<!-- this is the wrapper for the content -->
+				<div class="st-content-inner">
+					<!-- extra div for emulating position:fixed of the menu -->
+					<!-- Top Navigation -->
+
+
+					<header id="header" class="mainBlue col-xs-12 ">
+
+						<a href="main.html#/" class="col-xs-2" id="header-logo"> </a> <a
+							href="main.html#/"> <img
+							ng-src="../images/profilePictures/{{userData.USER_ID}}.jpg?{{time}}"
+							id="profile_picture"></a> <span id="user_welcome">Welcome,
+							<a href="main.html#/">{{userData.LAST_NAME}}
+								{{userData.FIRST_NAME}}</a>
+						</span> <a href="../logout.php" id="log_out" ng-click="logOut()">Logout
+							<i class="fa fa-sign-out"></i>
+						</a>
+
+
+					</header>
+
+
+					<div id="main-container" class="main-container col-xs-12">
+
+
+						<div id="content-container"
+							class="content-container col-xs-10 col-xs-offset-1">
+
+
+
+
+
+
+
+
+
+
+							
+
+								<div data-effect="st-effect-13" id="menuButton" 
+									class=" clickMenu menu-button">
+									
+								</div>
+
+							
+						
+
+							
+							<div class="include_content col-xs-12" ng-view>
+								
+
+							</div>
+
+
+
+
+
+
+
+
+
+
+						</div>
+						<!-- /st-content-inner -->
+					</div>
+					<!-- /st-content -->
+				</div>
+				<!-- /st-pusher -->
+
+
+
+
+			</div>
+
+
+
+
+		</div>
+
+	</div>
+</body>
+
+
+
+
+
+
+
+<link rel="stylesheet" type="text/css"
+	href="../jquery-ui-1.11.4.custom/jquery-ui.css">
+<script src="../jquery-ui-1.11.4.custom/jquery-1.12.0.min.js"></script>
+<script src="../jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
+
+<script src="../Resources/angular.min.js"></script>
+<script src="../Js/classie.js"></script>
+<script src="../Js/Chart.min.js"></script>
+<script src="../Js/sidebarEffects.js"></script>
+<script src="../Js/module/mainModule.js"></script>
+<script src="../Js/module/filters.js"></script>
+<script src="../Js/Services/postObject.js"></script>
+<script src="../Js/Services/postProject.js"></script>
+<script src="../Js/Services/postService.js"></script>
+<script src="../JS/Controllers/settings.js"></script>
+<script src="../JS/Controllers/friendUser.js"></script>
+<script src="../JS/Controllers/usersSearch.js"></script>
+<script src="../JS/Controllers/projectSearch.js"></script>
+<script src="../JS/Controllers/viewProject.js"></script>
+<script src="../JS/Controllers/main.js"></script>
+<script src="../sweetalert/dist/sweetalert.min.js"></script>
+<script src="../Resources/angular-route.js"></script>
+<script src="../JS/Controllers/user.js"></script>
+<script src="../JS/Controllers/mail.js"></script>
+<script src="../JS/Controllers/myTasks.js"></script>
+<script src="../JS/Controllers/myProjects.js"></script>
+<script src="../JS/Controllers/projectCreate.js"></script>
+<script src="../JS/Controllers/createTasks.js"></script>
+<script src="../JS/Controllers/createUser.js"></script>
+<script src="../JS/Controllers/createNews.js"></script>
+<script src="../JS/Controllers/allNews.js"></script>
+<script src="../Resources/angular-animate.min.js"></script>
+<script src="../Resources/angular-aria.min.js"></script>
+<script src="../Resources/angular-messages.min.js"></script>
+<script src="../Resources/angular-material.min.js"></script>
+
+</html>

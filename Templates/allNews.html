@@ -1,0 +1,83 @@
+
+
+<script src="../JS/Controllers/allNews.js"></script>
+
+<div class="mail-container col-xs-12" ng-controller="allNewsController">
+	<script src="../JS/tinymce/tinymce.min.js"></script>
+	<script type="text/javascript">
+		setTimeout(function() {
+			tinymce.init({
+				selector : '#newsTextArea',
+				removed_menuitems : 'newdocument',
+				height : "200",
+				readonly : 1
+			/* menubar: false,
+			toolbar:false,
+			statusbar:false,
+			contentEditable:false,
+			readonly : 1 */
+			});
+		}, 400);
+	</script>
+	<div class="taskPopUp" id="taskPopUp">
+		<div
+			class="task_pop_content col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3">
+			<span class="glyphicon glyphicon-remove" ng-click="close_popup()"></span>
+
+
+			<div class="col-md-12 taskInfoTask">
+
+				<div class="col-md-8 ">
+					<h1 class="mailSubjectFont">
+						&nbsp News:<span class="taskTaskSpan"> {{news_subject}}</span>
+					</h1>
+					<h1 class="mailSubjectFont col-md-12">
+						Date Added:<span class="taskTaskSpan"> {{date_added}}</span>
+					</h1>
+				</div>
+
+				
+				
+				
+
+				
+
+
+
+
+				<div class="col-md-12  textDiv">
+
+					<textarea id="newsTextArea" class="form-control projectDescription"
+						  id="comment"></textarea>
+				</div>
+
+			</div>
+
+			
+		</div>
+	</div>
+
+	<div class="col-xs-12 col-md-offset-2  col-md-8">
+		<md-content class="messagesList"> <md-list> <md-list-item
+			class="md-3-line newsItem "
+			ng-click="viewNews(item.news_subject,item.news_comment,item.date_added,item.news_id,$index)"
+			ng-repeat="item in news">
+		<div class="md-list-item-text col-xs-10 col-xs-offset-1 col-md-3">
+			<h2 class="col-xs-10 col-xs-offset-1 col-md-8">{{item.news_subject}}
+			</h2>
+			<h4 class="taskDueDate col-xs-10 col-xs-offset-1 col-md-6 ">{{item.date_added}}</h4>
+
+
+		</div>
+		<md-button
+			class="md-secondary viewTaskButton col-md-3 col-xs-10 col-xs-offset-1"
+			ng-click="viewNews(item.news_subject,item.news_message,item.date_added,item.news_id,$index)">View
+		News</md-button> <md-divider md-inset ng-if="!$last"></md-divider> </md-list-item> </md-list> </md-content>
+
+	</div>
+
+
+</div>
+
+
+

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<script src="../JS/Controllers/user.js"></script>
+
+<div ng-controller="userController"
+	class="col-xs-12  userContainer inputdemoIcons">
+
+
+	<!--   <md-input-container class="md-icon-float md-block col-xs-3">
+     
+      <label class="first_name_label label_user">First Name:</label>
+      <md-icon md-svg-src="../images/icons/ic_person_black_24px.svg" class="name"></md-icon>
+      <input ng-model="userData.LAST_NAME" type="text"  ng-readonly="true" >
+    </md-input-container>
+    -->
+	<!--     <a href="main.html#/"> <img ng-src="../images/profilePictures/{{userData.USER_ID}}.jpg" id="profile_picture_form"></a>-->
+
+	<h3 class="col-xs-12  col-md-6 col-lg-5 user_values">
+		First Name: <span class="user_values_span">{{userData.FIRST_NAME}}</span>
+	</h3>
+	<h3 class="col-xs-12  col-md-6 col-lg-5 user_values">
+		Last Name: <span class="user_values_span">{{userData.LAST_NAME}}</span>
+	</h3>
+
+
+
+	<h3 class="col-xs-12  col-md-6 col-lg-5 user_values">
+		Email: <a ng-href="mailto:{{userData.EMAIL}}" target="_blank"
+			class="user_values_span">{{userData.EMAIL}}</a>
+	</h3>
+	<h3 class="col-xs-12  col-md-6 col-lg-5 user_values">
+		Phone: <a ng-href="tel:{{userData.PHONENUMBER}}" target="_blank"
+			class="user_values_span">{{userData.PHONENUMBER}}</a>
+	</h3>
+
+	<h3 class="col-xs-12  col-md-6 col-lg-5 user_values">
+		Start Date: <span class="user_values_span">{{userData.START_DATE}}</span>
+	</h3>
+	<h3 class="col-xs-12  col-md-6 col-lg-5 user_values">
+		Birth Date: <span class="user_values_span">{{userData.BIRTH_DATE}}</span>
+	</h3>
+	<h3 class="col-xs-12  col-md-6 col-lg-5 user_values">
+		Location: <a ng-href="{{userData.location_link}}" target="_blank"
+			class="user_values_span">{{userData.location_name}}</a>
+	</h3>
+	<h3 class="col-xs-12  col-md-6 col-lg-5 user_values">
+		Client Facing: <span class="user_values_span">{{userData.CLIENT_FACING}}</span>
+	</h3>
+	<h3 class="col-xs-12  col-md-6 col-lg-5 user_values">
+		Role: <span class="user_values_span">{{userData.role_name}}</span>
+	</h3>
+	<div
+		class="col-xs-8 col-xs-offset-2 col-md-10 col-md-offset-1 col-lg-6 col-lg-offset-3 user_values"
+		style="width: 280px; height: 200px; top: -10px; left: 72%; position: absolute;">
+		<canvas id="projectsChart" width="300" height="300"></canvas>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<div class="div2-wrapper col-md-12 skills-container">
+		<button type="button" ng-click="toggle('arrow-info3', 'skills')"
+			class="btn btn-info infoBtn col-xs-12">
+			<span class=" col-xs-2 col-xs-offset-5 ">Skills:</span> <span
+				class="arrow-info3 arrow glyphicon glyphicon-menu-down"></span>
+		</button>
+		<div class="expand col-xs-12 skills display-none">
+			<button
+				ng-click="editSkill(x.COMPUTER_SKILLS_ID,x.SKILL_NAME,x.skill_level,$index)"
+				class="btn btn-info col-md-4 col-xs-12 col-lg-2 skill_button skillbutton{{x.skill_level}}"
+				ng-repeat="x in userData.SKILLS">{{x.SKILL_NAME}}
+				{{x.skill_level}}</button>
+
+
+			<div class="searchSkillsContainer col-md-12">
+				<md-input-container class="md-block searchSkillInput " flex-gt-sm>
+				<label>Search Skill To Add</label> <input ng-model="searchSkill">
+				</md-input-container>
+				<div class="col-md-5 skillsContainer">
+					<button ng-click="addSkill(x.COMPUTER_SKILLS_ID)"
+						class="btn btn-info col-md-6 col-xs-12 col-lg-5 skill_button "
+						ng-repeat="x in skills | filter:searchSkill |limitTo:4">
+						<i class="fa fa-plus" aria-hidden="true"></i> {{x.SKILL_NAME}}
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+		
+	
+</div>

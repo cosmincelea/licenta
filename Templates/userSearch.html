@@ -1,0 +1,91 @@
+<script src="../JS/Controllers/usersSearch.js"></script>
+<div ng-controller="usersSearchController" class="col-xs-12 users_container">
+    
+    
+    
+     <div class="popup_block_message">
+                <div class="pop_content_message col-xs-10 col-xs-offset-1 col-md-4 col-md-offset-4">
+                    <span class="glyphicon glyphicon-remove" ng-click="close_popup()"></span>
+                    <md-input-container class="md-block messageSubject" flex-gt-sm>
+            <label>Subject</label>
+            <input ng-model="messageSubject">
+          </md-input-container >
+                     <label for="message">Message:</label>
+  <textarea class=" messageText col-md-10 col-md-offset-1" rows="6" ng-model="messageText" id="message"></textarea>
+                    
+                    <button class="btn btn-primary col-xs-8 col-xs-offset-2 " ng-click="sendMessage(messageText,messageSubject)">Send Message</button>
+                </div>
+            </div>    
+            
+    
+    
+    
+    
+ <div class="searchPersonContainer col-md-12">
+		  <div class="searchPersonInput"><md-input-container class="md-block " flex-gt-sm>
+            <label>Search Person</label>
+            <input ng-model="userSearch">
+          </md-input-container>
+          
+          </div>
+  <div class="skillFilterStatus">
+   <md-switch ng-model="skillFilterStatus"  aria-label="Switch 1">
+     &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp   Enable Skill Filters
+  </md-switch>       </div></div>
+  
+  
+      
+      <div class="searchSkillsContainer col-md-12" ng-show="skillFilterStatus">
+      <md-input-container class="md-block searchSkillInput " flex-gt-sm>
+            <label>Search Skill</label>
+            <input ng-model="searchSkill">
+          </md-input-container>
+     <div class="col-md-5 skillsContainer"> 
+      <button ng-click="addSkillFilter(x.SKILL_NAME)" class="btn btn-info col-md-6 col-xs-12 col-lg-5 skill_button " ng-repeat="x in skills | filter:searchSkill |limitTo:4"><i class="fa fa-plus" aria-hidden="true"></i> {{x.SKILL_NAME}} </button>
+     
+     </div>
+     
+     
+     
+     <div class="div2-wrapper col-md-5  col-xs-12 skillsSearchContainer">
+                   <button type="button" ng-click="toggle('arrow-info3', 'skillsToggle')" class="btn btn-info infoBtn col-xs-12">
+                        <span class=" col-xs-4 col-xs-4  ">Filters:</span> <span class="arrow-info3 arrow glyphicon glyphicon-menu-down"></span>
+                    </button>
+<div class="expand col-xs-12 skillsToggle display-none">
+     	<button ng-click="remove($index)" class="btn btn-danger col-md-5 col-xs-12 col-lg-5 skill_button " ng-repeat="y in tags  "> <i class="fa fa-minus" aria-hidden="true"></i> {{y}}</button>              
+</div>
+     
+     
+     
+     
+     
+     
+     
+     
+     </div>
+ 
+     
+      </div>
+          
+
+
+
+
+ <md-card class="col-md-5 col-xs-10 col-xs-offset-1 col-lg-5 card_container" ng-repeat="user in usersData | selectedTags:tags|filter:userSearch">
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">{{user.FIRST_NAME}} {{user.LAST_NAME}}</span>
+            <a href="mailto:{{user.EMAIL}}"><span class="md-subhead">{{user.EMAIL}}</span></a>
+          </md-card-title-text>
+          <md-card-title-media>
+            <div  style="background-image:url('../images/profilePictures/{{user.USER_ID}}.jpg?{{time}}'), url('../images/profilePictures/user-default.png')" class="col-xs-6 widthSet card_image"></div>
+          </md-card-title-media>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+            <md-button ng-click="viewDetails(user.USER_ID)">Details</md-button>
+          <md-button ng-click="sendMessagePop(user.USER_ID)">Send Message</md-button>
+        </md-card-actions>
+      </md-card>
+
+
+</div>

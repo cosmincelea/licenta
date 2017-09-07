@@ -1,0 +1,64 @@
+
+
+
+
+<div class="mail-container col-xs-12" ng-controller="mailController">
+
+	<div class="mailPopUp">
+		<div
+			class="mail_pop_content col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3">
+			<span class="glyphicon glyphicon-remove" ng-click="close_popup()"></span>
+
+			<md-input-container class="col-md-8 col-xs-12 sentFromUserName">
+			<label>From: </label> <input ng-model="sentFromUser"
+				readonly="readonly"> </md-input-container>
+			<div class="profilePictureWrapperMail"><img 
+			ng-src="../images/profilePictures/{{sentFromId}}.jpg"
+ id="messageProfilePicture"></div>
+
+			<div class="col-md-12 mailUpDetails">
+				<h1 class="mailSubjectFont col-md-6" >Subject:
+					{{messageSubject}}</h1>
+					<md-switch ng-model="replyMailStatus" class="switchMail col-md-4"  aria-label="Switch 1">
+    &nbsp &nbsp &nbsp &nbsp &nbsp Reply
+  </md-switch> 
+			</div>
+		
+			<textarea ng-show="!replyMailStatus" readonly class="messageText  col-md-10 col-md-offset-1" rows="8" ng-model="messageTextView" id="messageFrom" ></textarea>
+		
+		
+		
+		 
+		<textarea ng-show="replyMailStatus"  class=" messageText col-md-10 col-md-offset-1" rows="8" ng-model="messageTextReply"  id="messageNew" ng-click="emptyText()"></textarea>
+		
+		<button ng-show="replyMailStatus" class="btn btn-primary btnMailReply" ng-click="replyMessage(messageTextReply)">Send Message</button>
+		<button  class="btn col-md-10 col-md-offset-1 btn-danger btnMailDelete" ng-click="deleteMessage()">Delete Message</button>
+		
+		</div>
+		
+	</div>
+
+
+	<div class="col-xs-12 ">
+		<md-content class="messagesList"> <md-list> <md-list-item
+			class="md-3-line mailStatus{{item.message_status}}" ng-click="viewMail(item.message_id,item.sent_to_id,item.sent_from_id,item.LAST_NAME,item.FIRST_NAME,item.message_text,item.message_subject,$index,item.message_id)"
+			ng-repeat="item in userMail.MESSAGES"> <img
+			ng-src="../images/profilePictures/{{item.sent_from_id}}.jpg"
+			class="md-avatar messageAvatar" alt="{{item.sent_from_id}}">
+		<div class="md-list-item-text">
+			<h2>{{item.FIRST_NAME}} {{item.LAST_NAME}}</h2>
+			<h4 class="mailSubject">{{item.message_subject}}</h4>
+
+			<p>{{item.data}}</p>
+		</div>
+		<md-button class="md-secondary viewMessageButton"
+			ng-click="viewMail(item.message_id,item.sent_to_id,item.sent_from_id,item.LAST_NAME,item.FIRST_NAME,item.message_text,item.message_subject,$index,item.message_id)">View
+		Message</md-button> <md-divider md-inset ng-if="!$last"></md-divider> </md-list-item> </md-list> </md-content>
+
+	</div>
+
+
+</div>
+
+
+

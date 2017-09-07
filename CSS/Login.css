@@ -1,0 +1,165 @@
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+
+
+@font-face {
+    font-family: loginFont;
+    src: url(fonts/Montserrat-Regular.ttf);
+}
+
+
+
+
+
+
+body{
+
+    position:absolute;
+    height:100%;
+    width:100%;
+    overflow:hidden;
+}
+
+
+.main-container{
+    background-image:url("pictures/login-background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height:100%
+}
+
+.login-container{
+    border:2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 15px;
+    height:60%;
+    background-color:rgba(240,240,240,0.95);
+    background-image:url("pictures/background-login-form.jpg");
+    background-repeat: repeat;
+    margin-top:10%;
+    position:relative;
+
+}
+
+.login-user-icon {
+    background-image:url("pictures/login-user-icon.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    height:35%;
+
+    margin-top:-50px;
+
+
+
+}
+
+
+
+
+
+
+.login-form {
+    padding: 20px 0;
+    position: relative;
+    z-index: 2;
+}
+.login-form input {
+    background-color: rgba(255, 255, 255, 0.2);
+    font-family:'loginFont'; 
+    font-weight: 400;
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin-top: 15px;
+    margin-bottom:10px;
+    
+    display: block;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    text-align: center;
+    font-size: 18px;
+    color: black;
+    -webkit-transition-duration: 0.35s;
+    transition-duration: 0.35s;
+    font-weight: 300;
+}
+.login-form input:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.login-form input:focus {
+
+
+    
+    background-color: rgba(41, 72, 255,0.2);
+    color: rgba(0,0,0,0.8);
+
+}
+.login-form span{
+    font-family:'loginFont';
+    font-size: 14px;
+    color:red;
+}
+
+
+.login-form button {
+
+
+    height:50px;
+    margin-top:20px;
+
+
+    font-family:'loginFont';
+    font-size: 18px;
+    -webkit-transition-duration: 0.25s;
+    transition-duration: 0.25s;
+}
+
+  
+/*---------------------------Media Query--------------------------*/
+
+@media  screen and (max-height: 550px) {
+    .login-container{
+        height:85%;
+    }
+}

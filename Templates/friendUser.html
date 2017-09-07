@@ -1,0 +1,105 @@
+<div  class="col-xs-12  userContainer inputdemoIcons" >
+
+
+
+<div class="popup_block_project">
+		<div
+			class="pop_content col-xs-10 col-xs-offset-1 col-md-4 col-md-offset-4">
+			<span class="glyphicon glyphicon-remove" ng-click="close_popup()"></span>
+			<h3 class="col-xs-12  col-md-10 col-lg-12 user_values">Name: <span class="user_values_span">{{userFriendData.FIRST_NAME}} {{userFriendData.LAST_NAME}}</span> 
+    </h3>
+			<div class="col-md-12">
+			<md-input-container class="md-block" flex-gt-sm>
+            <label>Search Project</label>
+            <input ng-model="searchProjectValue">
+          </md-input-container>
+			
+			 <md-card class="col-md-10 col-xs-10   col-lg-10 containerProjectCard" ng-repeat="project in projects| filter:searchProjectValue | limitTo:3">
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline  projectNameCard">{{project.project_name}} </span>
+            
+          </md-card-title-text>
+          
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+            <md-button ng-click="addOnProject(project.project_id,project.project_name,project)">Add Here</md-button>
+          
+        </md-card-actions>
+      </md-card>
+      </div>
+      
+      
+		</div>
+	</div>
+    
+
+    
+    <h3 class="col-xs-12  col-md-6 col-lg-5 user_values">First Name: <span class="user_values_span">{{userFriendData.FIRST_NAME}}</span> 
+    </h3>
+    <h3 class="col-xs-12  col-md-6 col-lg-5 user_values">Last Name: <span class="user_values_span">{{userFriendData.LAST_NAME}}</span>
+    </h3>
+  
+      
+    
+   <h3 class="col-xs-12  col-md-6 col-lg-5 user_values">Email:  <a ng-href="mailto:{{userFriendData.EMAIL}}"    target="_blank" class="user_values_span">{{userFriendData.EMAIL}}</a>
+    </h3></a>
+       <h3 class="col-xs-12  col-md-6 col-lg-5 user_values">Phone: <a ng-href="tel:{{userFriendData.PHONENUMBER}}"  target="_blank"class="user_values_span">{{userFriendData.PHONENUMBER}}</a>
+    </h3></a>
+    
+    <h3 class="col-xs-12  col-md-6 col-lg-5 user_values">Start Date: <span class="user_values_span">{{userFriendData.START_DATE}}</span> 
+    </h3>
+    <h3 class="col-xs-12  col-md-6 col-lg-5 user_values">Birth Date: <span class="user_values_span">{{userFriendData.BIRTH_DATE}}</span>
+    </h3>
+    <h3 class="col-xs-12  col-md-6 col-lg-5 user_values">Location: <a ng-href="{{userFriendData.location_link}}"  target="_blank"class="user_values_span">{{userFriendData.location_name}}</a>
+    </h3>
+    <h3 class="col-xs-12  col-md-6 col-lg-5 user_values">Client Facing: <span class="user_values_span">{{userFriendData.CLIENT_FACING}}</span>
+    </h3>
+    <h3 class="col-xs-12  col-md-6 col-lg-5 user_values">Role: <span class="user_values_span">{{userFriendData.role_name}}</span>
+    </h3>
+    
+    
+    
+    <div class="div3-wrapper col-md-12 projects-container">
+		<button type="button" ng-click="toggle('arrow-info4', 'projects')"
+			class="btn btn-info infoBtn col-xs-12">
+			<span class=" col-xs-2 col-xs-offset-5 ">Projects assigned:</span> <span
+				class="arrow-info4 arrow glyphicon glyphicon-menu-down"></span>
+		</button>
+		<div class="expand col-xs-12 projects display-none">
+			<md-card class="col-md-3 col-xs-10   col-lg-3 containerProjectCard" ng-repeat="project in projectsAssigned">
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline  projectNameCard">{{project.project_name}} </span>
+            
+          </md-card-title-text>
+          
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+            <md-button ng-click="viewProject(project.project_id)">View Project</md-button>
+          
+        </md-card-actions>
+      </md-card>
+		</div>
+	</div>
+    
+    
+    
+    
+    
+     <div class="div2-wrapper col-md-12 skills-container">
+                   <button type="button" ng-click="toggle('arrow-info3', 'skills')" class="btn btn-info infoBtn col-xs-12">
+                        <span class=" col-xs-2 col-xs-offset-5 ">Skills:</span> <span class="arrow-info3 arrow glyphicon glyphicon-menu-down"></span>
+                    </button>
+<div class="expand col-xs-12 skills display-none">
+                     <button ng-click="editSkill(x.COMPUTER_SKILLS_ID,x.SKILL_NAME,x.skill_level,$index)" class="btn btn-info col-md-4 col-xs-12 col-lg-2 skill_button skillbutton{{x.skill_level}}" ng-repeat="x in userFriendData.SKILLS">{{x.SKILL_NAME}} {{x.skill_level}}</button>
+</div>
+
+    
+    
+    
+    
+    <button ng-click="addToProject()" class="btn btn-info btnAddToProjectSearch col-md-4 col-md-3 col-xs-10 col-xs-offset-1" ng-show="showAdmin">Add To Project</button>
+    
+   </div>
+</div>

@@ -1,0 +1,47 @@
+  <?php
+     session_start();
+
+if(!isset($_SESSION['user_id'])){
+header("Location: http://localhost/Licenta/Templates/login.html"); 
+};
+
+
+if($_SESSION['user_type']!=1)
+{
+
+echo '<script>window.location="main.html#/";</script>';
+
+};
+?>
+<script src="../JS/tinymce/tinymce.min.js"></script>
+<script type="text/javascript">
+	setTimeout(function() {
+		tinymce.init({
+			selector : '#taskTextArea',
+			removed_menuitems : 'newdocument',
+			height : "280"
+		/* menubar: false,
+		toolbar:false,
+		statusbar:false,
+		contentEditable:false,
+		readonly : 1 */
+		});
+	}, 300);
+</script>
+
+<div class="col-xs-12   inputdemoIcons">
+	<script src="../JS/Controllers/createNews.js"></script>
+
+<md-input-container
+		class="md-block firstName col-md-3 col-xs-10 col-xs-offset-1"
+		flex-gt-sm> <label>News name:</label> <input
+		ng-model="newsName"> </md-input-container>
+
+<div class="col-md-10 col-md-offset-1 textDiv">
+
+		<textarea id="taskTextArea" class="form-control projectDescription"
+			ng-model="taskText" rows="8" id="comment"></textarea>
+	</div>
+
+<button class="col-md-2 col-xs-10 newsAddButton col-xs-offeset-1 btn btn-primary" ng-click="addNews()">Add news</button>
+</div>

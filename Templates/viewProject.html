@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<script src="../JS/Controllers/viewProject.js"></script>
+
+<script src="../JS/tinymce/tinymce.min.js"></script>
+<script type="text/javascript">
+	setTimeout(function() {
+		tinymce.init({
+			selector : '#projectTextArea',
+			removed_menuitems : 'newdocument',
+			height : "280"
+		/* menubar: false,
+		toolbar:false,
+		statusbar:false,
+		contentEditable:false,
+		readonly : 1 */
+		});
+	}, 500);
+</script>
+
+<div ng-controller="projectCreateController  "
+	class="col-xs-12  userContainer inputdemoIcons">
+
+
+	<div class="notificationBarSuccess col-xs-12  ">
+		<h4 class="col-md-8 col-md-offset-2 messageTextPlugin"
+			ng-model="successMessageText">{{successMessageText}}</h4>
+	</div>
+	<div class="notificationBarError col-xs-12  ">
+		<h4 class="col-md-8 col-md-offset-2 messageTextPlugin"
+			ng-model="errorMessageText">{{errorMessageText}}</h4>
+	</div>
+
+
+	<div class="col-md-12 mainInfo">
+	
+		<div class="col-md-12">
+		
+		<form >
+		<div class="editStatus col-xs-12">
+   <md-switch ng-model="editStatus" ng-show="showAdmin" class="editSwitch" aria-label="Switch 1">
+     &nbsp &nbsp &nbsp   &nbsp   Enable Edit
+  </md-switch>       </div>
+			<md-input-container class="md-block projectName"  flex-gt-sm>
+			<label>Project Name</label> <input ng-disabled="!editStatus"  ng-model="projectNameView"> </md-input-container>
+
+
+ <md-input-container class=" md-block estimatedViewTime">
+			<label>Estimated Time</label> <input ng-model="estimatedTimeView" ng-disabled="!editStatus"
+				type="number" step="1">
+</md-input-container>
+
+			<md-datepicker class="datePickerView"  ng-model="newDateValue" ng-show="editStatus"
+				md-placeholder="Enter date"></md-datepicker>
+				
+				<md-input-container ng-show="!editStatus" class="initialDateValue md-block ">
+			<label>Start Date</label> <input ng-model="initialDate" ng-disabled="!editStatus">
+</md-input-container>
+
+<div class="col-md-12 projectStatus">
+<label for="Priority"> Status: </label><br> <select
+						name="Status" ng-model="projectStatusValue" ng-disabled="!editStatus">
+						<option value="1">Opened</option>
+						<option value="0" selected>Closed</option>
+
+					</select>
+</div>
+				
+		</div>
+
+
+
+
+		<div class="col-md-12 deleteTeamLeadContainerView">
+			<md-input-container class="md-block teamLeadName " flex-gt-sm
+				> <label>Team Lead</label> <input
+				ng-model="teamLeadName" ng-disabled="!editStatus"> </md-input-container>
+			<button class="btn btn-danger btnDeleteTeam" ng-show="editStatus"
+				ng-click="deleteTeamLeadView()">Delete Team Lead</button>
+		</div>
+
+
+
+	</div>
+
+
+	<!-- 	
+	select team lead Area -->
+	<div class="col-md-12  searchTeamLeadContainerView">
+		<md-input-container class="md-block searchTeamLead" flex-gt-sm>
+		<label>Search Team Lead</label> <input ng-model="searchTeamLead">
+		</md-input-container>
+
+		<md-card
+			class="col-md-4 col-xs-12 col-lg-4 teamLeadUserCard"
+			ng-repeat="user in usersDataView |filter:searchTeamLead |limitTo:4">
+		<md-card-title class="teamLeadCardDetails"> <md-card-title-text>
+		<span class="md-headline userTeamName">{{user.FIRST_NAME}}
+			{{user.LAST_NAME}}</span> <span class="md-subhead userTeamRole">{{user.role_name}}</span>
+		</md-card-title-text> </md-card-title> <md-card-actions layout="row" layout-align="end center">
+
+		<md-button
+			ng-click="editTeamLead(user.USER_ID,user.FIRST_NAME,user.LAST_NAME)"
+			class="addTeamButton">Add Team Lead</md-button> </md-card-actions> </md-card>
+	</div>
+
+
+<div class="col-md-12  searchTeamMemberContainer" ng-show="editStatus">
+		<md-input-container class="md-block searchTeamLead" flex-gt-sm>
+		<label>Search Team Member</label> <input ng-model="searchTeamMember">
+		</md-input-container>
+
+		<md-card
+			class="col-md-4 col-xs-12 col-lg-4 teamMemberUserCard"
+			ng-repeat="user in usersDataView |filter:searchTeamMember|limitTo:4">
+		<md-card-title class="teamLeadCardDetails"> <md-card-title-text>
+		<span class="md-headline userTeamName">{{user.FIRST_NAME}}
+			{{user.LAST_NAME}}</span> <span class="md-subhead userTeamRole">{{user.role_name}}</span>
+		</md-card-title-text> </md-card-title> <md-card-actions layout="row" layout-align="end center">
+
+		<md-button
+			ng-click="addTeamMemberView(user.USER_ID,user.FIRST_NAME,user.LAST_NAME,user.role_name)"
+			class="addTeamButton">Add Team Member</md-button> </md-card-actions> </md-card>
+	</div>
+
+<div class="div2-wrapper col-md-12 teamMembersAddedContainer">
+                   <button type="button" ng-click="toggle('arrow-info3', 'teamMembersToggle')" class="btn btn-info infoBtn col-xs-12">
+                        <span class=" col-xs-2 col-xs-offset-5 ">Team Members:</span> <span class="arrow-info3 arrow glyphicon glyphicon-menu-down"></span>
+                    </button>
+<div class="expand col-xs-12 teamMembersToggle display-none">
+     	<md-card
+			class="col-xs-10 col-xs-offset-1 teamMemberUserCardList"
+			ng-repeat="teamMember in projectTeam ">
+		<md-card-title class="teamLeadCardDetails"> <md-card-title-text>
+		<span class="md-headline userTeamName">{{teamMember.FIRST_NAME}}
+			{{teamMember.LAST_NAME}}</span> <span class="md-subhead userTeamRole">{{teamMember.role_name}}</span>
+		</md-card-title-text> </md-card-title> <md-card-actions layout="row" layout-align="end center">
+
+		<md-button ng-show="editStatus" ng-click = "deleteTeamMemberView(teamMember.USER_ID,teamMember.FIRST_NAME,teamMember.LAST_NAME,$index,teamMember.user_project_id)" class="addTeamButton" > Delete Team Member</md-button> </md-card-actions> </md-card>               
+</div>              
+</div>
+
+
+
+
+
+
+	<div class="col-md-10 col-md-offset-1 textDiv">
+
+		<textarea id="projectTextArea" class="form-control projectDescription" 
+			ng-model="projectText" rows="8" id="comment"></textarea>
+	</div>
+
+	<button class="btn btn-primary createProject" ng-show="editStatus"
+		ng-click="updateProject(projectNameView,newDateValue,estimatedTimeView,projectStatusValue)">Save Project</button>
+
+
+
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>

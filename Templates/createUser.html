@@ -1,0 +1,137 @@
+  <?php
+                    session_start();
+
+if(!isset($_SESSION['user_id'])){
+header("Location: http://localhost/Licenta/Templates/login.html"); 
+};
+
+
+if($_SESSION['user_type']!=1)
+{
+
+echo '<script>window.location="main.html#/";</script>';
+
+};
+?>
+
+
+<div class="col-xs-12  userContainer inputdemoIcons">
+	<script src="../JS/Controllers/createUser.js"></script>
+
+
+
+
+<div class="notificationBarSuccess col-xs-12  ">
+		<h4 class="col-md-8 col-md-offset-2 messageTextPlugin"
+			ng-model="successMessageText">{{successMessageText}}</h4>
+	</div>
+	<div class="notificationBarError col-xs-12  ">
+		<h4 class="col-md-8 col-md-offset-2 messageTextPlugin"
+			ng-model="errorMessageText">{{errorMessageText}}</h4>
+	</div>
+
+
+
+
+
+	<md-input-container
+		class="md-block firstName col-md-3 col-xs-10 col-xs-offset-1"
+		flex-gt-sm> <label>First Name:</label> <input
+		ng-model="firstName"> </md-input-container>
+
+	<md-input-container
+		class="md-block firstName col-md-3 col-xs-10 col-xs-offset-1"
+		flex-gt-sm> <label>Last Name:</label> <input
+		ng-model="lastName"> </md-input-container>
+
+	<md-input-container
+		class="md-block firstName col-md-3 col-xs-10 col-xs-offset-1"
+		flex-gt-sm> <label>Email:</label> <input
+		ng-model="email"> </md-input-container>
+
+	
+
+
+	<md-input-container
+		class="md-block firstName col-md-3 col-xs-10 col-xs-offset-1"
+		flex-gt-sm> <label>Phone Number:</label> <input
+		 type="number" ng-model="phoneNumber"> </md-input-container>
+
+
+	<md-datepicker class=" createUserDate" ng-model="startDate"
+		md-placeholder="Start date"></md-datepicker>
+		
+	<md-datepicker class="createUserDate " ng-model="birthDate"
+		md-placeholder="Birth Date"></md-datepicker>
+
+<div class="col-md-12 passwordLocationCreateUser">
+<div class="locationCreateContainer">
+<md-input-container
+		class="md-block   col-md-3 col-xs-10 col-xs-offset-1"
+		flex-gt-sm> <label>Location:</label> <input
+		 ng-model="location_name"> </md-input-container>
+		 
+<button class="btn btn-danger  col-md-2 col-xs-10 col-xs-offset-1 btnDeleteLocationCreateUser" ng-click="removeLocation()">Remove Location</button>	 
+</div>
+<md-input-container
+		class="md-block passwordCreateUser  col-md-3 col-xs-10 col-xs-offset-1"
+		flex-gt-sm> <label>Password:</label> <input
+		 ng-model="password" type="password"> </md-input-container>
+
+	
+
+</div>
+
+
+<div class="col-md-10 col-md-offset-1  searchTeamContainer">
+		<md-input-container class="md-block searchLocation" flex-gt-sm>
+		<label>Search Location</label> <input ng-model="searchTeamLead">
+		</md-input-container>
+
+		<md-card
+			class="col-md-2 col-xs-12 col-lg-4 teamLeadUserCard"
+			ng-repeat="location in Locations |filter:searchTeamLead |limitTo:4">
+		<md-card-title class="teamLeadCardDetails"> <md-card-title-text>
+		<span class="md-headline userTeamName">
+			{{location.location_name}}</span> 
+		</md-card-title-text> </md-card-title> <md-card-actions layout="row" layout-align="end center">
+
+		<md-button
+			ng-click="addLocation(location.location_id,location.location_name)"
+			class="addTeamButton" >Add Location</md-button> </md-card-actions> </md-card>
+	</div>
+	
+<div class="col-md12 roleCreateContainer">	<md-input-container
+		class="md-block  col-md-3 col-xs-10 col-xs-offset-1"
+		flex-gt-sm> <label>Role:</label> <input
+		 ng-model="role_name"> </md-input-container>
+		 
+<button class="btn btn-danger col-md-2 col-xs-10 col-xs-offset-1 btnDeleteRoleCreateUser" ng-click="removeRole()">Remove Role</button>	 
+	</div>
+	
+	<div class="col-md-10 col-md-offset-1  searchRoleContainer">
+	
+		<md-input-container class="md-block searchLocation" flex-gt-sm>
+		<label>Search Role</label> <input ng-model="searchRole">
+		</md-input-container>
+
+		<md-card
+			class="col-md-2 col-xs-12 col-lg-4 teamLeadUserCard"
+			ng-repeat="role in Roles |filter:searchRole|limitTo:4">
+		<md-card-title class="teamLeadCardDetails"> <md-card-title-text>
+		<span class="md-headline userTeamName">
+			{{role.role_name}}</span> 
+		</md-card-title-text> </md-card-title> <md-card-actions layout="row" layout-align="end center">
+
+		<md-button
+			ng-click="addRole(role.role_id,role.role_name)"
+			class="addTeamButton" >Add Role</md-button> </md-card-actions> </md-card>
+	</div>
+	
+	
+	
+	
+<div class="col-md-12">
+<button class="btn btn-primary  col-md-3 btnMainCreateUser" ng-click="createUser()">Create User</button>
+</div>
+</div>
